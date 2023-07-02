@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="lib/fontawesome/fontawesome-free-6.4.0-web/css/fontawesome.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1C1A32;
+            color: white;
+            margin: 0;
+        }
+
+        header {
+            position: relative;
+            width: 100%;
+            height: 30px;
+        }
+
+        .navBar {
+            display: flex;
+            background: #0c3f65;
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: space-between;
+            position: fixed;
+            width: 100%;
+            box-shadow: rgba(226, 130, 241, 0.19) 0px 10px 20px, rgba(152, 36, 210, 0.23) 0px 6px 6px;
+        }
+
+        .nav-items {
+            width: 50%;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        .nav-items div {
+            margin: 10px;
+        }
+
+        .nav-items a {
+            margin-left: 5px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 35px;
+
+        }
+
+        #manageCustomer {
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .background {
+            margin: 15%;
+            background-color: white;
+            width: 70%;
+            height: 70%;
+        }
+
+        .textFields {
+            margin: 50px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .textFields > div {
+            margin: 20px;
+        }
+
+        .textFields > div > div {
+            display: inline-block;
+            color: black;
+        }
+
+        .mainContainer {
+            display: flex;
+        }
+
+        .firstColumn {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .buttons {
+            margin: 0 50px;
+
+        }
+
+        .buttons button {
+            margin: 20px;
+            width: 93px;
+        }
+        .secondColumn{
+            color: black;
+            margin: 50px 0 0;
+        }
+
+    </style>
+</head>
+<body>
+<header>
+    <div class="navBar">
+        <div class="logo">
+            <i class='bx bxs-wink-smile'></i>
+        </div>
+        <nav class="nav-items">
+            <div><i class='bx bx-home-alt-2'></i><a>DashBoard</a></div>
+            <div><i class='bx bx-user'></i><a>Customer Manage</a></div>
+            <div><i class='bx bx-category-alt'></i><a>Item Manage</a></div>
+            <div><i class='bx bxs-cart'></i><a>Place Order</a></div>
+        </nav>
+    </div>
+</header>
+<div id="dashboard">
+
+</div>
+<div id="manageCustomer">
+    <div class="background">
+        <div class="mainContainer">
+            <div class="firstColumn">
+                <div class="textFields">
+                    <div>
+                        <label for="name"></label>
+                        <input id="name" type="text" placeholder="Name" name="name">
+                    </div>
+                    <div>
+                        <label for="address"></label>
+                        <input id="address" type="text" placeholder="Address" name="address">
+                    </div>
+                    <div>
+                        <label for="contact"></label>
+                        <input id="contact" type="text" placeholder="Contact" name="contact">
+                    </div>
+                    <div>
+                        <label for="birthDay"></label>
+                        <input id="birthDay" type="text" placeholder="Birth Day" name="birthDay">
+                    </div>
+                    <div>
+                        <div><input type="radio" name="gender" value="male">Male</div>
+                        <div><input type="radio" name="gender" value="female">Female</div>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button>ADD</button>
+                    <button>DELETE</button>
+                    <br>
+                    <button>UPDATE</button>
+                    <button>DELETE</button>
+                </div>
+            </div>
+            <div class="secondColumn">
+                <div class="table">
+                    <table border="1">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Contact</th>
+                            <th>Address</th>
+                            <th>Birthday</th>
+                            <th>Gender</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>01</td>
+                            <td>Pasindu</td>
+                            <td>078719579</td>
+                            <td>Habarana</td>
+                            <td>2002-10-08</td>
+                            <td>Male</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+</body>
+</html>
