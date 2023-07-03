@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         * {
@@ -23,6 +23,7 @@
             position: relative;
             width: 100%;
             height: 30px;
+            z-index: 1000;
         }
 
         .navBar {
@@ -33,7 +34,7 @@
             justify-content: space-between;
             position: fixed;
             width: 100%;
-            box-shadow: rgba(226, 130, 241, 0.19) 0px 10px 20px, rgba(152, 36, 210, 0.23) 0px 6px 6px;
+            box-shadow: rgba(251, 250, 252, 0.19) 0px 10px 20px, rgba(247, 246, 248, 0.23) 0px 6px 6px;
         }
 
         .nav-items {
@@ -64,18 +65,6 @@
         }
 
 
-
-        .background {
-            margin: 15%;
-            background-color: #1C1A32;
-            width: 70%;
-            height: 70%;
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-around;
-        }
-
         .textFields {
             margin: 50px;
             display: flex;
@@ -84,6 +73,7 @@
 
         .textFields > div {
             margin: 7px;
+            position: relative;
         }
 
         .textFields input[type='text']{
@@ -92,18 +82,8 @@
 
         .textFields > div > div {
             display: inline-block;
-            color: black;
         }
 
-        .mainContainer {
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .firstColumn {
-            display: flex;
-            flex-direction: column;
-        }
 
         .buttons {
             margin: 0 50px;
@@ -115,43 +95,16 @@
             width: 93px;
             height: 34px;
         }
-        .secondColumn{
-            color: black;
-            margin: 50px 0 0;
-        }
-        .tableHead{
 
-            border-top-right-radius: 15px;
-            border-top-left-radius: 15px;
-            background: linear-gradient(35deg ,red ,blue);
-        }
-        .tableHead th{
-            padding: 11px;
-            font-size: 20px;
-
-
-        }
-        .tableHead  th:first-child{
-            border-top-left-radius: 15px;
-        }
-        .tableHead th:last-child{
-            border-top-right-radius: 15px;
-        }
-        tbody tr:last-child>td:first-child{
-            border-bottom-left-radius: 15px;
-        }
-        tbody tr:last-child>td:last-child{
-            border-bottom-right-radius: 15px;
-        }
         .input-container{
             position:relative;
             margin-bottom:25px;
         }
         .input-container label{
             position:absolute;
-            top:0px;
+            top:-12px;
             left:0px;
-            font-size:16px;
+            font-size:12px;
             color:#fff;
             pointer-event:none;
             transition: all 0.5s ease-in-out;
@@ -177,27 +130,6 @@
 
         }
 
-        /*.tableBody{
-            border: 1px solid black;
-        }*/
-        .tableBody tr{
-            border: 1px solid black;
-        }
-        .tableBody td {
-            border-right: 1px solid black;
-            text-align: center;
-        }
-        table {
-            border-collapse: collapse;
-            color: white;
-        }
-        .table{
-            height: 100%;
-            background-image: url("assert/5092143.jpg");
-            background-size: cover;
-            background-blend-mode: multiply;
-            background-color: #1C1A32;
-        }
         .button {
             position: relative;
             background: #444;
@@ -295,6 +227,18 @@
             }
         }
 
+        .radio{
+            color: white;
+        }
+
+        option{
+            background: #1C1A32;
+            color: white;
+        }
+        select{
+            color: white !important;
+
+        }
 
     </style>
 </head>
@@ -316,29 +260,29 @@
 
 </div>
 <div id="manageCustomer">
-    <div class="background">
-        <div class="mainContainer">
-            <div class="firstColumn">
+    <div class="container shadow-lg">
+        <div class="row">
+            <div class="col-5">
                 <div class="textFields">
                     <div class="input-container">
-                        <input id="name" type="text" placeholder="Name" name="name">
+                        <input id="name" type="text" placeholder="Pasindu Sampath" name="name">
                         <label for="name">Name</label>
                     </div>
                     <div class="input-container">
-                        <input id="address" type="text" placeholder="Address" name="address">
-                        <label for="address"></label>
+                        <input id="address" type="text" placeholder="Trinco R/d,Thimbirigaswewa,Habarana" name="address">
+                        <label for="address">Address</label>
                     </div>
                     <div class="input-container">
-                        <input id="contact" type="text" placeholder="Contact" name="contact">
-                        <label for="contact"></label>
+                        <input id="contact" type="text" placeholder="+94 ** *** ****" name="contact">
+                        <label for="contact">Mobile NO</label>
                     </div>
                     <div class="input-container">
-                        <input id="birthDay" type="text" placeholder="Birth Day" name="birthDay">
-                        <label for="birthDay"></label>
+                        <input id="birthDay" type="date" placeholder="Birth Day" name="birthDay">
+                        <label for="birthDay">Birthday</label>
                     </div>
                     <div>
-                        <div><input type="radio" name="gender" value="male">Male</div>
-                        <div><input type="radio" name="gender" value="female">Female</div>
+                        <div class="radio"><input type="radio" name="gender" value="male">Male</div>
+                        <div class="radio"><input type="radio" name="gender" value="female">Female</div>
                     </div>
                 </div>
                 <div class="buttons">
@@ -349,9 +293,9 @@
                     <button class="button" style="--clr:#8A2BE2"><span>DELETE</span><i></i></button>
                 </div>
             </div>
-            <div class="secondColumn">
-                <div class="table">
-                    <table>
+            <div class="col-6">
+                <div class="mt-5">
+                    <table class="table table-dark table-hover">
                         <thead class="tableHead">
                         <tr>
                             <th>ID</th>
@@ -378,6 +322,93 @@
         </div>
     </div>
 </div>
+<div id="manageItem">
+    <div class="container shadow-lg">
+        <div class="row">
+            <div class="col-5">
+                <div class="textFields ">
+                    <div class="input-container">
+                        <input type="text" id="itemCode" placeholder="I-****">
+                        <label for="itemCode">Item Code</label>
+                    </div>
+                    <div class="input-container" >
+                        <input type="text" id="itemName" placeholder="example">
+                        <label for="itemName">Item Name</label>
+                    </div>
+                    <div class="input-container" >
+                        <input type="number" id="itemPrice" placeholder="0000.00">
+                        <label for="itemPrice">Item Price</label>
+                    </div>
+                    <div class="input-container">
+                        <input type="number" id="itemQty" placeholder="00">
+                        <label for="itemQty">Item QTY</label>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <button class="button" style="--clr:#FF44CC"><span>ADD</span><i></i></button>
+                    <button class="button" style="--clr:#0FF0FC"><span>SEARCH</span><i></i></button>
+                    <br>
+                    <button class="button" style="--clr:#39FF14"><span>UPDATE</span><i></i></button>
+                    <button class="button" style="--clr:#8A2BE2"><span>DELETE</span><i></i></button>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mt-5">
+                    <table class="table table-dark table-hover">
+                        <thead>
+                        <tr>
+                            <td>Item Code</td>
+                            <td>Item Name</td>
+                            <td>Item Price</td>
+                            <td>Item QTY</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>I-001</td>
+                            <td>Test Name</td>
+                            <td>Test Price</td>
+                            <td>Test QTY</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="placeOrder">
+    <div class="container">
+        <div class="row">
+            <div class="col-5">
+                <div class="textFields">
+                    <select class="form-select bg-transparent"  aria-label="Default select example">
+                        <option selected>Select Customer</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                    <div class="input-container mt-3">
+                        <input id="name-on-placeOrder" type="text" name="name" placeholder="John" disabled>
+                        <label for="name-on-placeOrder">Name</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="textFields">
+                    <select class="form-select bg-transparent" aria-label="Default select example">
+                        <option selected>Select Item</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>
