@@ -378,7 +378,7 @@
     </div>
 </div>
 <div id="placeOrder">
-    <div class="container">
+    <div class="container shadow-lg">
         <div class="row">
             <div class="col-5">
                 <div class="textFields">
@@ -389,19 +389,51 @@
                         <option value="3">Three</option>
                     </select>
                     <div class="input-container mt-3">
-                        <input id="name-on-placeOrder" type="text" name="name" placeholder="John" disabled>
-                        <label for="name-on-placeOrder">Name</label>
+                        <input type="text" name="id" placeholder="C-***">
+                        <label>Id</label>
+                    </div>
+                    <div class="input-container mt-3">
+                        <input type="text" name="name" placeholder="John" disabled>
+                        <label>Name</label>
+                    </div>
+                    <div class="input-container mt-3">
+                        <input type="text" name="address" placeholder="NO 22/B--------" disabled>
+                        <label>Address</label>
+                    </div>
+                    <div class="input-container mt-3">
+                        <input type="text" name="contact" placeholder="+94 -- --- ----" >
+                        <label>Contact</label>
                     </div>
                 </div>
             </div>
             <div class="col-5">
-                <div class="textFields">
+                <div class="mt-5">
                     <select class="form-select bg-transparent" aria-label="Default select example">
                         <option selected>Select Item</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
+                    <div class="input-container mt-3">
+                        <input type="text" name="itemCode" placeholder="I-***">
+                        <label>Item Code</label>
+                    </div>
+                    <div class="input-container mt-3">
+                        <input type="text" name="itemName" placeholder="------" disabled>
+                        <label>Description</label>
+                    </div>
+                    <div class="input-container mt-3">
+                        <input type="number" name="qtyOnHand" placeholder="--" disabled>
+                        <label>Qty On Hand</label>
+                    </div>
+                    <div class="input-container mt-3">
+                        <input type="number" name="price" placeholder="--" disabled>
+                        <label>Price</label>
+                    </div>
+                    <div class="input-container mt-3">
+                        <input type="number" name="qtyBought" placeholder="--">
+                        <label>QTY</label>
+                    </div>
                 </div>
 
             </div>
