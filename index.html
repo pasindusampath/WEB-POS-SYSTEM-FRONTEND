@@ -129,7 +129,7 @@
         .input-container input:focus {
             border: none;
             outline: none;
-            border-bottom: 1px solid #e74c3c;
+            border-bottom: 1px solid #64ffeb;
         }
 
         .input-container input:focus ~ label,
@@ -336,6 +336,10 @@
             <div class="col-5">
                 <div class="textFields">
                     <div class="input-container">
+                        <input id="id" type="number" placeholder="**" name="id">
+                        <label for="id">Id</label>
+                    </div>
+                    <div class="input-container">
                         <input id="name" type="text" placeholder="Pasindu Sampath" name="name">
                         <label for="name">Name</label>
                     </div>
@@ -352,7 +356,7 @@
                         <input id="birthDay" type="date" placeholder="Birth Day" name="birthDay">
                         <label for="birthDay">Birthday</label>
                     </div>
-                    <div>
+                    <div class="gender">
                         <div class="radio"><input type="radio" name="gender" value="male">Male</div>
                         <div class="radio"><input type="radio" name="gender" value="female">Female</div>
                     </div>
@@ -577,6 +581,10 @@
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="lib/jquery-3.6.4.min.js"></script>
+<script type="module" src="model/Customer.js" ></script>
+<script type="module" src="controller/CustomerController.js"></script>
+
 <script>
     const chartElement = document.getElementById('myChart');
     const chartData = {
