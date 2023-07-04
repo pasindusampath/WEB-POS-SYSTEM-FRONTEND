@@ -6,7 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         * {
@@ -76,7 +77,7 @@
             position: relative;
         }
 
-        .textFields input[type='text']{
+        .textFields input[type='text'] {
             width: 100%;
         }
 
@@ -96,42 +97,45 @@
             height: 34px;
         }
 
-        .input-container{
-            position:relative;
-            margin-bottom:25px;
-        }
-        .input-container label{
-            position:absolute;
-            top:-12px;
-            left:0px;
-            font-size:12px;
-            color:#fff;
-            pointer-event:none;
-            transition: all 0.5s ease-in-out;
-        }
-        .input-container input{
-            border:0;
-            border-bottom:1px solid #555;
-            background:transparent;
-            width:100%;
-            padding:8px 0 5px 0;
-            font-size:16px;
-            color:#fff;
+        .input-container {
+            position: relative;
+            margin-bottom: 25px;
         }
 
-        .input-container input:last-child{
+        .input-container label {
+            position: absolute;
+            top: -12px;
+            left: 0px;
+            font-size: 12px;
+            color: #fff;
+            pointer-event: none;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .input-container input {
+            border: 0;
+            border-bottom: 1px solid #555;
+            background: transparent;
+            width: 100%;
+            padding: 8px 0 5px 0;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .input-container input:last-child {
             width: 50%;
         }
 
-        .input-container input:focus{
-            border:none;
-            outline:none;
-            border-bottom:1px solid #e74c3c;
+        .input-container input:focus {
+            border: none;
+            outline: none;
+            border-bottom: 1px solid #e74c3c;
         }
+
         .input-container input:focus ~ label,
-        .input-container input:valid ~ label{
-            top:-12px;
-            font-size:12px;
+        .input-container input:valid ~ label {
+            top: -12px;
+            font-size: 12px;
 
         }
 
@@ -166,6 +170,7 @@
             position: relative;
             z-index: 1;
         }
+
         .button i {
             position: absolute;
             inset: 0;
@@ -207,7 +212,8 @@
             left: 60%;
             animation: move 3s infinite;
         }
-        .background h3{
+
+        .background h3 {
             display: inline-block;
         }
 
@@ -235,20 +241,42 @@
             }
         }
 
-        .radio{
+        .radio {
             color: white;
         }
 
-        option{
+        option {
             background: #1C1A32;
             color: white;
         }
-        select{
+
+        select {
             color: white !important;
 
         }
-        body>div{
+
+        body > div {
             height: 100vh;
+        }
+        .top-card{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .top-card .text{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .center{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
         }
 
     </style>
@@ -267,8 +295,40 @@
         </nav>
     </div>
 </header>
-<div id="dashboard">
+<div id="dashboard" class="mt-5">
+    <div class="container shadow-lg">
+        <div class="row">
+            <div class="col-5">
+                <div class="center">
+                    <canvas id="clock"> </canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <div class="orderCount top-card">
+                    <div class="text">
+                        <h5>ORDER COUNT FOR THIS MONTH</h5>
+                        <h5>30</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="orderCount top-card">
+                    <div class="text">
+                        <h5>ORDER COUNT FOR THIS MONTH</h5>
+                        <h5>30</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div >
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
 
+    </div>
 </div>
 <div id="manageCustomer">
     <div class="container shadow-lg">
@@ -280,7 +340,8 @@
                         <label for="name">Name</label>
                     </div>
                     <div class="input-container">
-                        <input id="address" type="text" placeholder="Trinco R/d,Thimbirigaswewa,Habarana" name="address">
+                        <input id="address" type="text" placeholder="Trinco R/d,Thimbirigaswewa,Habarana"
+                               name="address">
                         <label for="address">Address</label>
                     </div>
                     <div class="input-container">
@@ -342,11 +403,11 @@
                         <input type="text" id="itemCode" placeholder="I-****">
                         <label for="itemCode">Item Code</label>
                     </div>
-                    <div class="input-container" >
+                    <div class="input-container">
                         <input type="text" id="itemName" placeholder="example">
                         <label for="itemName">Item Name</label>
                     </div>
-                    <div class="input-container" >
+                    <div class="input-container">
                         <input type="number" id="itemPrice" placeholder="0000.00">
                         <label for="itemPrice">Item Price</label>
                     </div>
@@ -393,7 +454,7 @@
         <div class="row">
             <div class="col-4">
                 <div class="textFields">
-                    <select class="form-select bg-transparent"  aria-label="Default select example">
+                    <select class="form-select bg-transparent" aria-label="Default select example">
                         <option selected>Select Customer</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -412,7 +473,7 @@
                         <label>Address</label>
                     </div>
                     <div class="input-container mt-3">
-                        <input type="text" name="contact" placeholder="+94 -- --- ----" >
+                        <input type="text" name="contact" placeholder="+94 -- --- ----">
                         <label>Contact</label>
                     </div>
                 </div>
@@ -512,6 +573,113 @@
     </div>
 </div>
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const chartElement = document.getElementById('myChart');
+    const chartData = {
+        labels: [
+            'Red',
+            'Blue',
+            'Yellow'
+        ],
+        datasets: [{
+            label: 'My First Dataset',
+            data: [100, 50, 100],
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)'
+            ],
+            hoverOffset: 4
+        }]
+    };
+    const chartConfig = {
+        type: 'pie',
+        data: chartData,
+    };
+    new Chart(chartElement,chartConfig)
+</script>
+<script>
+    const canvas = document.getElementById("clock");
+    const ctx = canvas.getContext("2d");
+    let radius = canvas.height / 2;
+    ctx.translate(radius, radius);
+    radius = radius * 0.90
+    drawClock();
+    setInterval(drawClock, 1000);
+
+    function drawClock() {
+        drawFace(ctx, radius);
+        drawNumbers(ctx, radius);
+        drawTime(ctx, radius);
+    }
+
+    function drawFace(ctx, radius) {
+        const grad = ctx.createRadialGradient(0,0,radius*0.95, 0,0,radius*1.05);
+        grad.addColorStop(0, '#333');
+        grad.addColorStop(0.5, 'white');
+        grad.addColorStop(1, '#333');
+        ctx.beginPath();
+        ctx.arc(0, 0, radius, 0, 2*Math.PI);
+        ctx.fillStyle = 'white';
+        ctx.fill();
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = radius*0.1;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(0, 0, radius*0.1, 0, 2*Math.PI);
+        ctx.fillStyle = '#333';
+        ctx.fill();
+    }
+
+    function drawNumbers(ctx, radius) {
+        ctx.font = radius*0.15 + "px arial";
+        ctx.textBaseline="middle";
+        ctx.textAlign="center";
+        for(let num = 1; num < 13; num++){
+            let ang = num * Math.PI / 6;
+            ctx.rotate(ang);
+            ctx.translate(0, -radius*0.85);
+            ctx.rotate(-ang);
+            ctx.fillText(num.toString(), 0, 0);
+            ctx.rotate(ang);
+            ctx.translate(0, radius*0.85);
+            ctx.rotate(-ang);
+        }
+    }
+
+    function drawTime(ctx, radius){
+        const now = new Date();
+        let hour = now.getHours();
+        let minute = now.getMinutes();
+        let second = now.getSeconds();
+        //hour
+        hour=hour%12;
+        hour=(hour*Math.PI/6)+
+            (minute*Math.PI/(6*60))+
+            (second*Math.PI/(360*60));
+        drawHand(ctx, hour, radius*0.5, radius*0.07);
+        //minute
+        minute=(minute*Math.PI/30)+(second*Math.PI/(30*60));
+        drawHand(ctx, minute, radius*0.8, radius*0.07);
+        // second
+        second=(second*Math.PI/30);
+        drawHand(ctx, second, radius*0.9, radius*0.02);
+    }
+
+    function drawHand(ctx, pos, length, width) {
+        ctx.beginPath();
+        ctx.lineWidth = width;
+        ctx.lineCap = "round";
+        ctx.moveTo(0,0);
+        ctx.rotate(pos);
+        ctx.lineTo(0, -length);
+        ctx.stroke();
+        ctx.rotate(-pos);
+    }
+</script>
 </body>
 </html>
