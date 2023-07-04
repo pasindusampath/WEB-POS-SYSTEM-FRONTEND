@@ -6,6 +6,7 @@ class CustomerController{
         $('#manageCustomer .buttons button:first-child').click(this.addCustomer.bind(this));
         $('#manageCustomer .buttons button:nth-child(2)').click(this.searchCustomer.bind(this));
         $('#manageCustomer .buttons button:nth-child(4)').click(this.updateCustomer.bind(this));
+        $('#manageCustomer .buttons button:nth-child(5)').click(this.deleteCustomer.bind(this));
 
     }
 
@@ -16,6 +17,7 @@ class CustomerController{
         }
 
         let customer = this.collectData();
+        console.log(customer.toString());
     }
     updateCustomer(){
         let boolean = this.validate(1);
@@ -23,6 +25,7 @@ class CustomerController{
             alert("Fill All With Valid Details")
         }
         let customer = this.collectData();
+        console.log(customer.toString());
     }
 
     searchCustomer(){
@@ -31,8 +34,20 @@ class CustomerController{
             alert("Enter Id")
             return;
         }
+        let customer = this.collectData();
+        console.log(customer.toString());
         //fetch customer
 
+    }
+
+    deleteCustomer(){
+        let boolean = this.validate(1);
+        if(!boolean){
+            alert('Enter Id and Search First');
+            return
+        }
+        let customer = this.collectData();
+        console.log(customer.toString());
     }
 
 
