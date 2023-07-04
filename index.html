@@ -118,6 +118,11 @@
             font-size:16px;
             color:#fff;
         }
+
+        .input-container input:last-child{
+            width: 50%;
+        }
+
         .input-container input:focus{
             border:none;
             outline:none;
@@ -202,6 +207,9 @@
             left: 60%;
             animation: move 3s infinite;
         }
+        .background h3{
+            display: inline-block;
+        }
 
         @keyframes move {
             0% {
@@ -238,6 +246,9 @@
         select{
             color: white !important;
 
+        }
+        body>div{
+            height: 100vh;
         }
 
     </style>
@@ -380,7 +391,7 @@
 <div id="placeOrder">
     <div class="container shadow-lg">
         <div class="row">
-            <div class="col-5">
+            <div class="col-4">
                 <div class="textFields">
                     <select class="form-select bg-transparent"  aria-label="Default select example">
                         <option selected>Select Customer</option>
@@ -406,7 +417,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-5">
+            <div class="col-3">
                 <div class="mt-5">
                     <select class="form-select bg-transparent" aria-label="Default select example">
                         <option selected>Select Item</option>
@@ -414,29 +425,89 @@
                         <option value="2">Two</option>
                         <option value="3">Three</option>
                     </select>
-                    <div class="input-container mt-3">
-                        <input type="text" name="itemCode" placeholder="I-***">
-                        <label>Item Code</label>
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <div class="input-container mt-3">
+                                <input type="text" name="itemCode" placeholder="I-***">
+                                <label>Item Code</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-container mt-3">
+                                <input type="text" name="itemName" placeholder="------" disabled>
+                                <label>Description</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="input-container mt-3">
-                        <input type="text" name="itemName" placeholder="------" disabled>
-                        <label>Description</label>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="input-container mt-3">
+                                <input type="number" name="qtyOnHand" placeholder="--" disabled>
+                                <label>Qty On Hand</label>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="input-container mt-3">
+                                <input type="number" name="price" placeholder="--" disabled>
+                                <label>Price</label>
+                            </div>
+                        </div>
                     </div>
+
+
                     <div class="input-container mt-3">
-                        <input type="number" name="qtyOnHand" placeholder="--" disabled>
-                        <label>Qty On Hand</label>
-                    </div>
-                    <div class="input-container mt-3">
-                        <input type="number" name="price" placeholder="--" disabled>
-                        <label>Price</label>
-                    </div>
-                    <div class="input-container mt-3">
-                        <input type="number" name="qtyBought" placeholder="--">
+                        <input style="width: 50%" type="number" name="qtyBought" placeholder="--">
+                        <button>ADD To CART</button>
                         <label>QTY</label>
+
                     </div>
                 </div>
 
             </div>
+            <div class="col-3 ms-5">
+                <div>
+                    <div class="total mt-5">
+                        <div class="background">
+                            <h3>TOTAL : </h3>
+                            <h3 id="total">500.00</h3>
+                        </div>
+                    </div>
+                    <div class="discount mt-5">
+                        <div class="background">
+                            <h3>DISCOUNT : </h3>
+                            <h3 id="discount">500.00</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8 ms-5">
+                <table class=" ms-5 table table-dark table-hover">
+                    <thead>
+                    <tr>
+                        <td>ITEM CODE</td>
+                        <td>ITEM NAME</td>
+                        <td>ITEM PRICE</td>
+                        <td>ITEM QTY</td>
+                        <td>ITEM SUBTOTAL</td>
+                        <td>OPTION</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>test</td>
+                        <td>test</td>
+                        <td>test</td>
+                        <td>test</td>
+                        <td>test</td>
+                        <td>test</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </div>
 </div>
