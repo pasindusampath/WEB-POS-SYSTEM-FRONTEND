@@ -13,20 +13,17 @@
         * {
             box-sizing: border-box;
         }
-
         body {
             background-color: #1C1A32;
             color: white;
             margin: 0;
         }
-
         header {
             position: relative;
             width: 100%;
             height: 30px;
             z-index: 1000;
         }
-
         .navBar {
             display: flex;
             background: #0c3f65;
@@ -37,71 +34,57 @@
             width: 100%;
             box-shadow: rgba(251, 250, 252, 0.19) 0px 10px 20px, rgba(247, 246, 248, 0.23) 0px 6px 6px;
         }
-
         .nav-items {
             width: 50%;
             display: flex;
             justify-content: space-evenly;
         }
-
         .nav-items div {
             margin: 10px;
         }
-
         .nav-items a {
             margin-left: 5px;
+            cursor: pointer;
         }
-
         .logo {
             width: 50px;
             height: 35px;
 
         }
-
         #manageCustomer {
             display: flex;
             align-items: center;
             height: 100vh;
             width: 100vw;
         }
-
-
         .textFields {
             margin: 50px;
             display: flex;
             flex-direction: column;
         }
-
         .textFields > div {
             margin: 7px;
             position: relative;
         }
-
         .textFields input[type='text'] {
             width: 100%;
         }
-
         .textFields > div > div {
             display: inline-block;
         }
-
-
         .buttons {
             margin: 0 50px;
 
         }
-
         .buttons button {
             margin: 20px;
             width: 93px;
             height: 34px;
         }
-
         .input-container {
             position: relative;
             margin-bottom: 25px;
         }
-
         .input-container label {
             position: absolute;
             top: -12px;
@@ -111,7 +94,6 @@
             pointer-event: none;
             transition: all 0.5s ease-in-out;
         }
-
         .input-container input {
             border: 0;
             border-bottom: 1px solid #555;
@@ -121,24 +103,20 @@
             font-size: 16px;
             color: #fff;
         }
-
         .input-container input:last-child {
             width: 50%;
         }
-
         .input-container input:focus {
             border: none;
             outline: none;
             border-bottom: 1px solid #64ffeb;
         }
-
         .input-container input:focus ~ label,
         .input-container input:valid ~ label {
             top: -12px;
             font-size: 12px;
 
         }
-
         .button {
             position: relative;
             background: #444;
@@ -150,7 +128,6 @@
             font-size: 1rem;
             transition: 0.2s;
         }
-
         .button:hover {
             letter-spacing: 0.2rem;
             background: var(--clr);
@@ -158,25 +135,21 @@
             /* box-shadow: 0 0 35px var(--clr); */
             animation: box 3s infinite;
         }
-
         .button::before {
             content: "";
             position: absolute;
             inset: 2px;
             background: #272822;
         }
-
         .button span {
             position: relative;
             z-index: 1;
         }
-
         .button i {
             position: absolute;
             inset: 0;
             display: block;
         }
-
         .button i::before {
             content: "";
             position: absolute;
@@ -188,13 +161,11 @@
             background: #272822;
             transition: 0.2s;
         }
-
         .button:hover i::before {
             width: 15px;
             left: 20%;
             animation: move 3s infinite;
         }
-
         .button i::after {
             content: "";
             position: absolute;
@@ -206,17 +177,14 @@
             background: #272822;
             transition: 0.2s;
         }
-
         .button:hover i::after {
             width: 15px;
             left: 60%;
             animation: move 3s infinite;
         }
-
         .background h3 {
             display: inline-block;
         }
-
         @keyframes move {
             0% {
                 transform: translateX(0);
@@ -228,7 +196,6 @@
                 transform: translateX(0);
             }
         }
-
         @keyframes box {
             0% {
                 box-shadow: #27272c;
@@ -240,21 +207,17 @@
                 box-shadow: #27272c;
             }
         }
-
         .radio {
             color: white;
         }
-
         option {
             background: #1C1A32;
             color: white;
         }
-
         select {
             color: white !important;
 
         }
-
         body > div {
             height: 100vh;
         }
@@ -270,11 +233,19 @@
             flex-direction: column;
             align-items: center;
         }
-
         .center{
             width: 100%;
             height: 100%;
             display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        #manageCustomer,#dashboard,#manageItem,#placeOrder{
+            display: none;
+        }
+        .show{
+            display: flex !important;
+            flex-direction: column;
             align-items: center;
             justify-content: space-around;
         }
@@ -295,7 +266,7 @@
         </nav>
     </div>
 </header>
-<div id="dashboard" class="mt-5">
+<div id="dashboard" class="mt-5 show">
     <div class="container shadow-lg">
         <div class="row">
             <div class="col-5">
@@ -584,7 +555,18 @@
 <script src="lib/jquery-3.6.4.min.js"></script>
 <script type="module" src="model/Customer.js" ></script>
 <script type="module" src="controller/CustomerController.js"></script>
-
+<script>
+    let buttons = $('.nav-items a');
+    $.each(buttons,function (i, e) {
+        console.log(i)
+        console.log($(e).text())
+        $(e).click(function (){
+            console.log('pressed '+i)
+            $('body>div').removeClass('show');
+            $('body>div').eq(i).addClass('show');
+        });
+    });
+</script>
 <script>
     const chartElement = document.getElementById('myChart');
     const chartData = {
@@ -608,7 +590,7 @@
         type: 'pie',
         data: chartData,
     };
-    new Chart(chartElement,chartConfig)
+    new Chart(chartElement, chartConfig)
 </script>
 <script>
     const canvas = document.getElementById("clock");
