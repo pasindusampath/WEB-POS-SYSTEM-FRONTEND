@@ -17,7 +17,20 @@ class CustomerController{
         }
 
         let customer = this.collectData();
-        console.log(customer.toString());
+        customer._id=0;
+        let json = JSON.stringify(customer);
+        let jsonData = json.replaceAll('_','');
+        var setting={
+            "url":"http://localhost:8080/customer",
+            "method":"POST",
+            "timeout":0,
+            "headers":{"Content-Type":"application/json"},
+            "data":jsonData,
+        }
+        $.ajax(setting).done(function (resp){
+           console.log(resp);
+        });
+        //console.log(jsonData);
     }
     updateCustomer(){
         let boolean = this.validate(1);
