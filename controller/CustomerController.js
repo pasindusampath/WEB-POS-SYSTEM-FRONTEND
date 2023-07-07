@@ -13,7 +13,8 @@ class CustomerController{
     addCustomer(){
         let boolean = this.validate();
         if(!boolean){
-            alert("Fill All With Valid Details")
+            alert("Fill All With Valid Details");
+            return;
         }
 
         let customer = this.collectData();
@@ -39,7 +40,8 @@ class CustomerController{
             alert("Fill All With Valid Details")
         }
         let customer = this.collectData();
-        console.log(customer.toString());
+        let data = JSON.stringify(customer);
+        data = data.replaceAll("_","");
     }
 
     searchCustomer(){
@@ -48,9 +50,43 @@ class CustomerController{
             alert("Enter Id")
             return;
         }
-        let customer = this.collectData();
-        console.log(customer.toString());
-        //fetch customer
+        var settings = {
+            "url": "http://localhost:8080/customer?id="+id,
+            "method": "GET",
+            "timeout": 0,
+        };
+
+        $.ajax(settings).done(function (resp){
+            console.log(resp);
+            $('#id').val(resp.id);
+            $('#name').val(resp.name);
+            $('#address').val(resp.address);
+            $('#birthDay').val(resp.birthday);
+            $('#contact').val(resp.mobileNo);
+            let i=1;
+            if(resp.gen==='Male'){
+                i=0;
+            }
+            $('#manageCustomer .gender input[type=radio]').eq(i).prop({"checked":true})
+        });
+
+        /*var myHeaders = new Headers();
+        myHeaders.append("Accept"," application/json");
+
+
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            body: JSON.stringify(c),
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:8080/customer", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+*/
 
     }
 
