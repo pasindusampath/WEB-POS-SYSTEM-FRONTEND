@@ -21,16 +21,17 @@ class CustomerController{
         let json = JSON.stringify(customer);
         let jsonData = json.replaceAll('_','');
         var setting={
-            "url":"http://localhost:8080/customer",
-            "method":"POST",
-            "timeout":0,
-            "headers":{"Content-Type":"application/json"},
-            "data":jsonData,
+            url:"http://localhost:8080/customer",
+            method:"POST",
+            timeout:0,
+            headers:{"Content-Type":"application/json"},
+            data:jsonData
+
         }
         $.ajax(setting).done(function (resp){
-           console.log(resp);
+            console.log(resp.id)
+            alert(customer._name+" Registered Success ( ID:"+resp.id+" )")
         });
-        //console.log(jsonData);
     }
     updateCustomer(){
         let boolean = this.validate(1);
