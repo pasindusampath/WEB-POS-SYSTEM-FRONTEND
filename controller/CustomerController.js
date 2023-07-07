@@ -38,10 +38,23 @@ class CustomerController{
         let boolean = this.validate(1);
         if(!boolean){
             alert("Fill All With Valid Details")
+            return
         }
         let customer = this.collectData();
         let data = JSON.stringify(customer);
-        data = data.replaceAll("_","");
+        let send = data.replaceAll("_","");
+
+        var setting={
+            "url":"http://localhost:8080/customer",
+            "method":"PUT",
+            "headers":{"Content-Type":"application/json"},
+            "data":send
+        };
+
+        $.ajax(setting).done(function (){
+          alert("Update Success")
+        });
+
     }
 
     searchCustomer(){
@@ -69,24 +82,6 @@ class CustomerController{
             }
             $('#manageCustomer .gender input[type=radio]').eq(i).prop({"checked":true})
         });
-
-        /*var myHeaders = new Headers();
-        myHeaders.append("Accept"," application/json");
-
-
-
-        var requestOptions = {
-            method: 'GET',
-            headers: myHeaders,
-            body: JSON.stringify(c),
-            redirect: 'follow'
-        };
-
-        fetch("http://localhost:8080/customer", requestOptions)
-            .then(response => response.text())
-            .then(result => console.log(result))
-            .catch(error => console.log('error', error));
-*/
 
     }
 
