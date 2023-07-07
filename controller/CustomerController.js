@@ -16,7 +16,6 @@ class CustomerController{
             alert("Fill All With Valid Details");
             return;
         }
-
         let customer = this.collectData();
         customer._id=0;
         let json = JSON.stringify(customer);
@@ -56,7 +55,6 @@ class CustomerController{
         });
 
     }
-
     searchCustomer(){
         let id = $('#id').val();
         if(!id){
@@ -84,15 +82,24 @@ class CustomerController{
         });
 
     }
-
     deleteCustomer(){
         let boolean = this.validate(1);
         if(!boolean){
             alert('Enter Id and Search First');
             return
         }
-        let customer = this.collectData();
-        console.log(customer.toString());
+        let id = $('#id').val();
+        let setting={
+            "url":"http://localhost:8080/customer?id="+id,
+            "method":"DELETE",
+            "timeout":0,
+
+        }
+        $.ajax(setting).done((resp)=>{
+            alert("Delete Success");
+        })
+
+
     }
 
 
