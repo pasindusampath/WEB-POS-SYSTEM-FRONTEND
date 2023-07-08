@@ -27,6 +27,7 @@ class ItemController {
         };
         $.ajax(st).done((resp) => {
             console.log(resp)
+            this.getAll()
             alert("Item Added Success ( ID:" + resp.itemCode + ")");
         })
         console.log(item.toString())
@@ -53,6 +54,7 @@ class ItemController {
         }
 
         $.ajax(setting).done((resp) => {
+            this.getAll()
             alert("Item Update Success")
         })
 
@@ -87,14 +89,17 @@ class ItemController {
     getAll() {
         let setting = {
             url: "http://localhost:8080/item?type=all?",
-            method:'GET',
-            timeout:0
+            method: 'GET',
+            timeout: 0
         };
-        $.ajax(setting).done((resp)=>{
+        $.ajax(setting).done((resp) => {
             console.log(resp);
-            $.each(resp,(i,e)=>{
-               console.log(e);
-            });
+            $('#manageItem tbody').children().remove()
+            $.each(resp, (i, e) => {
+                    let tr = `<tr><td>${e.itemCode}</td><td>${e.itemName}</td><td>${e.itemPrice}</td><td>${e.itemQty}</td></tr>`;
+                    $('#manageItem tbody').append(tr)
+                }
+            );
         })
     }
 
@@ -116,6 +121,7 @@ class ItemController {
             }
         }
         $.ajax(setting).done((resp) => {
+            this.getAll()
             alert("Deleted Success")
         })
         console.log(item.toString())
