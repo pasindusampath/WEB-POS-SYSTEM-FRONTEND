@@ -498,7 +498,7 @@
             </div>
             <div class="col-3">
                 <div class="mt-5">
-                    <select class="form-select bg-transparent" aria-label="Default select example">
+                    <select id="cbItem" class="form-select bg-transparent" aria-label="Default select example">
                         <option selected>Select Item</option>
                         <option value="1">One</option>
                         <option value="2">Two</option>
@@ -600,6 +600,7 @@
 <script type="module" src="model/Item.js"></script>
 <script type="module" src="controller/CustomerController.js"></script>
 <script type="module" src="controller/ItemController.js"></script>
+<script type="module" src="controller/PlaceOrderController.js"></script>
 <script>
     let buttons = $('.nav-items a');
     $.each(buttons, function (i, e) {
