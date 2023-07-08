@@ -6,6 +6,7 @@ class ItemController {
         $('#manageItem .buttons button').eq(1).click(this.searchItem.bind(this));
         $('#manageItem .buttons button').eq(2).click(this.updateItem.bind(this));
         $('#manageItem .buttons button').eq(3).click(this.deleteItem.bind(this));
+        this.getAll();
     }
 
     addItem() {
@@ -15,18 +16,18 @@ class ItemController {
             return
         }
         let item = this.collectData()
-        item._itemCode=0;
-        console.log(JSON.stringify(item).replaceAll("_",""))
+        item._itemCode = 0;
+        console.log(JSON.stringify(item).replaceAll("_", ""))
         let st = {
             url: "http://localhost:8080/item",
             method: "POST",
-            headers:{"Content-Type":"application/json"},
-            timeout:0,
-            data:JSON.stringify(item).replaceAll("_","")
+            headers: {"Content-Type": "application/json"},
+            timeout: 0,
+            data: JSON.stringify(item).replaceAll("_", "")
         };
-        $.ajax(st).done((resp)=>{
+        $.ajax(st).done((resp) => {
             console.log(resp)
-            alert("Item Added Success ( ID:"+resp.itemCode+")");
+            alert("Item Added Success ( ID:" + resp.itemCode + ")");
         })
         console.log(item.toString())
     }
@@ -38,20 +39,20 @@ class ItemController {
             return
         }
         let item = this.collectData();
-        let setting={
-            url:"http://localhost:8080/item",
-            method:"PUT",
-            headers: {"Content-Type":"application/json"},
-            data: JSON.stringify(item).replaceAll("_",""),
-            timeout:0,
+        let setting = {
+            url: "http://localhost:8080/item",
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            data: JSON.stringify(item).replaceAll("_", ""),
+            timeout: 0,
             statusCode: {
-                402:function (){
+                402: function () {
                     alert("Update Fail,You Cannot change ID provide Your Existing Id For Do Update Operation")
                 }
             }
         }
 
-        $.ajax(setting).done((resp)=>{
+        $.ajax(setting).done((resp) => {
             alert("Item Update Success")
         })
 
@@ -64,24 +65,37 @@ class ItemController {
             alert('Input ID');
             return
         }
-        let setting={
-            url: "http://localhost:8080/item?itemCode="+code,
+        let setting = {
+            url: "http://localhost:8080/item?itemCode=" + code,
             method: "GET",
             timeout: 0,
-            statusCode:{
-                402:function (){
+            statusCode: {
+                402: function () {
                     alert("Customer Not Found")
                 }
             }
-
         }
 
-        $.ajax(setting).done((resp)=> {
+        $.ajax(setting).done((resp) => {
             $('#itemName').val(resp.itemName)
             $('#itemPrice').val(resp.itemPrice)
             $('#itemQty').val(resp.itemQty)
         });
 
+    }
+
+    getAll() {
+        let setting = {
+            url: "http://localhost:8080/item?type=all?",
+            method:'GET',
+            timeout:0
+        };
+        $.ajax(setting).done((resp)=>{
+            console.log(resp);
+            $.each(resp,(i,e)=>{
+               console.log(e);
+            });
+        })
     }
 
     deleteItem() {
@@ -92,21 +106,20 @@ class ItemController {
         }
         let item = this.collectData();
         let setting = {
-            url:"http://localhost:8080/item?itemCode="+item._itemCode,
-            method:"DELETE",
-            timeout:0,
-            statusCode:{
-                402:function (){
+            url: "http://localhost:8080/item?itemCode=" + item._itemCode,
+            method: "DELETE",
+            timeout: 0,
+            statusCode: {
+                402: function () {
                     alert("Delete Operation Failed")
                 }
             }
         }
-        $.ajax(setting).done((resp)=>{
+        $.ajax(setting).done((resp) => {
             alert("Deleted Success")
         })
         console.log(item.toString())
     }
-
 
     collectData() {
         return new Item($('#itemCode').val(), $('#itemName').val(), $('#itemPrice').val(), $('#itemQty').val());
