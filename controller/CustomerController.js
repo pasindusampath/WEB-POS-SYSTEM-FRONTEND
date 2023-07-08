@@ -7,6 +7,7 @@ class CustomerController{
         $('#manageCustomer .buttons button:nth-child(2)').click(this.searchCustomer.bind(this));
         $('#manageCustomer .buttons button:nth-child(4)').click(this.updateCustomer.bind(this));
         $('#manageCustomer .buttons button:nth-child(5)').click(this.deleteCustomer.bind(this));
+        this.getAll();
 
     }
 
@@ -31,6 +32,7 @@ class CustomerController{
         $.ajax(setting).done(function (resp){
             console.log(resp.id)
             alert(customer._name+" Registered Success ( ID:"+resp.id+" )")
+            c1.getAll();
         });
     }
     updateCustomer(){
@@ -52,6 +54,7 @@ class CustomerController{
 
         $.ajax(setting).done(function (){
           alert("Update Success")
+            c1.getAll();
         });
 
     }
@@ -97,11 +100,28 @@ class CustomerController{
         }
         $.ajax(setting).done((resp)=>{
             alert("Delete Success");
+            this.getAll();
         })
 
 
     }
 
+    getAll(){
+        let setting = {
+            "url":"http://localhost:8080/customer?type=all",
+            "method":"GET",
+            "timeout":0
+        }
+
+        $.ajax(setting).done(resp=>{
+            $('#manageCustomer tbody').children().empty()
+            $.each(resp,(i,e)=>{
+                let row = `<tr><td>${e.id}</td><td>${e.name}</td><td>${e.address}</td><td>${e.mobileNo}</td><td>${e.birthday}</td><td>${e.gen}</td></tr>`;
+                $('#manageCustomer tbody').append(row)
+            })
+        })
+
+    }
 
     collectData(){
         return new Customer($('#id').val(), $('#name').val(), $('#address').val(), $('#contact').val()
@@ -121,4 +141,4 @@ class CustomerController{
 
 
 }
-new CustomerController();
+let c1 = new CustomerController();
