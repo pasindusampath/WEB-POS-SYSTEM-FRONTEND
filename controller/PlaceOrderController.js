@@ -1,3 +1,4 @@
+import {search} from '../db/Database.js';
 const itemdb = 'ITEMDATA';
 export class PlaceOrderController{
 
@@ -16,7 +17,11 @@ export class PlaceOrderController{
         });
         $('#cbItem').change(function (){
             let find = $(this).find('option:selected');
-            console.log(find.text())
+            let search1 = search(find.text());
+            $('#placeOrder .po_item input[name=itemCode]').val(search1._itemCode);
+            $('#placeOrder .po_item input[name=itemName]').val(search1._itemName);
+            $('#placeOrder .po_item input[name=qtyOnHand]').val(search1._itemQty);
+            $('#placeOrder .po_item input[name=price]').val(search1._itemPrice);
         })
         /*let i = $('#cbItem option');
         $.each(i,function (ii,e){
