@@ -1,5 +1,7 @@
 import {Item} from "../model/Item.js";
 
+const itemDb = 'ITEMDATA';
+
 class ItemController {
     constructor() {
         $('#manageItem .buttons button').eq(0).click(this.addItem.bind(this));
@@ -95,11 +97,14 @@ class ItemController {
         $.ajax(setting).done((resp) => {
             console.log(resp);
             $('#manageItem tbody').children().remove()
+            let item_arr = [];
             $.each(resp, (i, e) => {
                     let tr = `<tr><td>${e.itemCode}</td><td>${e.itemName}</td><td>${e.itemPrice}</td><td>${e.itemQty}</td></tr>`;
                     $('#manageItem tbody').append(tr)
+                    item_arr.push(new Item(e.itemCode, e.itemName, e.itemPrice, e.itemQty))
                 }
             );
+            localStorage.setItem(itemDb,JSON.stringify(item_arr))
         })
     }
 
@@ -137,6 +142,7 @@ class ItemController {
             return !item._itemCode ? false : !item._itemName ? false : !item._itemPrice ? false : !item._itemQty ? false : true;
         return !item._itemName ? false : !item._itemPrice ? false : !item._itemQty ? false : true;
     }
+
 
 }
 

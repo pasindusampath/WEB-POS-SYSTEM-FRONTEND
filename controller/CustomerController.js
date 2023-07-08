@@ -1,6 +1,8 @@
 import {Customer} from "../model/Customer.js";
-
+const customerDb = 'CUSTOMERDATA';
 class CustomerController{
+
+
     constructor() {
         console.log('called')
         $('#manageCustomer .buttons button:first-child').click(this.addCustomer.bind(this));
@@ -114,11 +116,15 @@ class CustomerController{
         }
 
         $.ajax(setting).done(resp=>{
-            $('#manageCustomer tbody').children().empty()
+            $('#manageCustomer tbody').children().empty();
+            let itemArr=[];
             $.each(resp,(i,e)=>{
                 let row = `<tr><td>${e.id}</td><td>${e.name}</td><td>${e.address}</td><td>${e.mobileNo}</td><td>${e.birthday}</td><td>${e.gen}</td></tr>`;
                 $('#manageCustomer tbody').append(row)
+                itemArr.push(new Customer(e.id,e.name,e.address,e.mobileNo,e.birthday,e.gen))
             })
+            ;
+            localStorage.setItem(customerDb,JSON.stringify(itemArr))
         })
 
     }
