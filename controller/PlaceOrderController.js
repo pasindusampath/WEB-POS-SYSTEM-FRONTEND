@@ -109,10 +109,11 @@ export class PlaceOrderController {
 
     placeOrder(){
         let dataSet = JSON.stringify(controller.array);
+        let data = dataSet.replaceAll("_","");
         let setting = {
             url:"http://localhost:8080/place",
             method:"POST",
-            data:dataSet,
+            data:data,
             timeout:0
         }
 
