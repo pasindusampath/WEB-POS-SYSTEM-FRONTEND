@@ -1,4 +1,5 @@
 import {Item} from "../model/Item.js";
+import {getAllItem} from "../db/Database.js";
 
 const itemDb = 'ITEMDATA';
 
@@ -94,18 +95,34 @@ class ItemController {
             method: 'GET',
             timeout: 0
         };
-        $.ajax(setting).done((resp) => {
-            console.log(resp);
-            $('#manageItem tbody').children().remove()
-            let item_arr = [];
-            $.each(resp, (i, e) => {
-                    let tr = `<tr><td>${e.itemCode}</td><td>${e.itemName}</td><td>${e.itemPrice}</td><td>${e.itemQty}</td></tr>`;
-                    $('#manageItem tbody').append(tr)
-                    item_arr.push(new Item(e.itemCode, e.itemName, e.itemPrice, e.itemQty))
-                }
-            );
-            localStorage.setItem(itemDb,JSON.stringify(item_arr))
-        })
+        try {
+            $.ajax(setting).done((resp) => {
+                console.log(resp);
+                let item_arr = [];
+                $.each(resp, (i, e) => {
+
+                        item_arr.push(new Item(e.itemCode, e.itemName, e.itemPrice, e.itemQty))
+                    }
+                );
+                localStorage.setItem(itemDb,JSON.stringify(item_arr));
+
+            }).always(function(jqXHR, textStatus) {
+                ob.setTable()
+            });
+        }catch (e) {
+            console.log(e.toString())
+            ob.setTable();
+        }
+
+    }
+
+    setTable(){
+        $('#manageItem tbody').children().remove()
+        let allItem = getAllItem();
+        $.each(allItem,((i,e)=>{
+            let tr = `<tr><td>${e._itemCode}</td><td>${e._itemName}</td><td>${e._itemPrice}</td><td>${e._itemQty}</td></tr>`;
+            $('#manageItem tbody').append(tr)
+        }))
     }
 
     deleteItem() {
@@ -146,4 +163,4 @@ class ItemController {
 
 }
 
-new ItemController();
+var ob = new ItemController();

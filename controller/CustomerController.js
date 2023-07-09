@@ -1,4 +1,5 @@
 import {Customer} from "../model/Customer.js";
+import {getAllCustomers} from "../db/Database.js";
 const customerDb = 'CUSTOMERDATA';
 class CustomerController{
 
@@ -116,17 +117,26 @@ class CustomerController{
         }
 
         $.ajax(setting).done(resp=>{
-            $('#manageCustomer tbody').children().empty();
+
             let itemArr=[];
             $.each(resp,(i,e)=>{
-                let row = `<tr><td>${e.id}</td><td>${e.name}</td><td>${e.address}</td><td>${e.mobileNo}</td><td>${e.birthday}</td><td>${e.gen}</td></tr>`;
-                $('#manageCustomer tbody').append(row)
                 itemArr.push(new Customer(e.id,e.name,e.address,e.mobileNo,e.birthday,e.gen))
             })
             ;
             localStorage.setItem(customerDb,JSON.stringify(itemArr))
+        }).always((a,b)=>{
+            c1.setTable();
         })
 
+    }
+
+    setTable(){
+        $('#manageCustomer tbody').children().empty();
+        let allCustomers = getAllCustomers();
+        $.each(allCustomers , (i,e)=>{
+            let row = `<tr><td>${e._id}</td><td>${e._name}</td><td>${e._address}</td><td>${e._mobileNo}</td><td>${e._birthday}</td><td>${e._gen}</td></tr>`;
+            $('#manageCustomer tbody').append(row)
+        })
     }
 
     collectData(){

@@ -5,6 +5,7 @@ export class PlaceOrderController{
     constructor() {
         this.setItemComboBox()
         this.setCustomerComboBox()
+        $('#btnAddToCart').click(this.btnAddToCart.bind(this))
     }
 
     setItemComboBox(){
@@ -49,6 +50,12 @@ export class PlaceOrderController{
             $('#placeOrder .po_customer input[name=address]').val(cust._address);
             $('#placeOrder .po_customer input[name=contact]').val(cust._mobileNo);
         })
+    }
+    btnAddToCart(){
+        let id = $('#cbItem').val();
+        let name = $('.po_item input[name=itemName]').val();
+
+        console.log(id+' : '+name)
     }
 }
 new PlaceOrderController()
