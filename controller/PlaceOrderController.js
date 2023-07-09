@@ -8,6 +8,7 @@ export class PlaceOrderController {
         this.setItemComboBox()
         this.setCustomerComboBox()
         $('#btnAddToCart').click(this.btnAddToCart.bind(this));
+        $('#btnPlaceOrder').click(this.placeOrder.bind(this));
         $('#tblPlaceOrder tr').remove();
     }
 
@@ -90,8 +91,6 @@ export class PlaceOrderController {
         console.log(id + ' : ' + name + ' : ' + price + ' : ' + qty + ' : ' + subTotal)
     }
 
-
-
     setTable(){
         $('#tblPlaceOrder tr').remove();
         $.each(this.array,(i,e)=>{
@@ -106,6 +105,21 @@ export class PlaceOrderController {
             raw.append(td)
             $('#tblPlaceOrder').append(raw)
         })
+    }
+
+    placeOrder(){
+        let dataSet = JSON.stringify(controller.array);
+        let setting = {
+            url:"http://localhost:8080/place",
+            method:"POST",
+            data:dataSet,
+            timeout:0
+        }
+
+        $.ajax(setting).done(resp=>{
+            console.log(resp)
+        })
+
     }
 
 }
