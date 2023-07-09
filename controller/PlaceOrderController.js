@@ -1,23 +1,25 @@
-import {searchItem, getAllItem, getAllCustomers, searchCustomer} from '../db/Database.js';
-const itemdb = 'ITEMDATA';
-export class PlaceOrderController{
+import {getAllCustomers, getAllItem, searchCustomer, searchItem} from '../db/Database.js';
+
+export class PlaceOrderController {
+    array = [];
 
     constructor() {
         this.setItemComboBox()
         this.setCustomerComboBox()
-        $('#btnAddToCart').click(this.btnAddToCart.bind(this))
+        $('#btnAddToCart').click(this.btnAddToCart.bind(this));
+        $('#tblPlaceOrder tr').remove();
     }
 
-    setItemComboBox(){
+    setItemComboBox() {
         $('#cbItem option').remove()
         let items = getAllItem();
         console.log(items)
-        $.each(items,(i,e)=>{
+        $.each(items, (i, e) => {
             let op = `<option>${e._itemCode}</option>`
             $('#cbItem').append($(op));
 
         });
-        $('#cbItem').change(function (){
+        $('#cbItem').change(function () {
             let find = $(this).find('option:selected');
             let search1 = searchItem(find.text());
             $('#placeOrder .po_item input[name=itemCode]').val(search1._itemCode);
@@ -32,15 +34,16 @@ export class PlaceOrderController{
             })
         })*/
     }
-    setCustomerComboBox(){
+
+    setCustomerComboBox() {
         $('#cbCustomer option').remove()
         let allCustomers = getAllCustomers();
-        $.each(allCustomers,(i,e)=>{
+        $.each(allCustomers, (i, e) => {
             var op = $(`<option>${e._id}</option>`);
             $('#cbCustomer').append(op);
         })
 
-        $('#cbCustomer').change(function (){
+        $('#cbCustomer').change(function () {
             let find = $(this).find('option:selected');
             let text = find.text();
             let cust = searchCustomer(text);
@@ -51,11 +54,28 @@ export class PlaceOrderController{
             $('#placeOrder .po_customer input[name=contact]').val(cust._mobileNo);
         })
     }
-    btnAddToCart(){
+
+    btnAddToCart() {
         let id = $('#cbItem').val();
         let name = $('.po_item input[name=itemName]').val();
+        let price = $('.po_item input[name=price]').val();
+        let qty = $('.po_item input[name=qtyBought]').val();
+        let subTotal = parseFloat(price) * parseFloat(qty);
 
-        console.log(id+' : '+name)
+
+        let btn = $('<button>DELETE</button>');
+
+        let raw = $(`<tr><td>${id}</td><td>${name}</td><td>${price}</td><td>${qty}</td><td>${subTotal}</td></tr>`);
+        btn.click(function () {
+            raw.remove()
+        })
+        let td = $('<td></td>');
+        td.append(btn)
+        raw.append(td)
+        $('#tblPlaceOrder').append(raw)
+
+        console.log(id + ' : ' + name + ' : ' + price + ' : ' + qty + ' : ' + subTotal)
     }
 }
+
 new PlaceOrderController()
