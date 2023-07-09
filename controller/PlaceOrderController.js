@@ -1,4 +1,5 @@
 import {getAllCustomers, getAllItem, searchCustomer, searchItem} from '../db/Database.js';
+import {CartItem} from "../model/cartItem.js";
 
 export class PlaceOrderController {
     array = [];
@@ -61,21 +62,52 @@ export class PlaceOrderController {
         let price = $('.po_item input[name=price]').val();
         let qty = $('.po_item input[name=qtyBought]').val();
         let subTotal = parseFloat(price) * parseFloat(qty);
-
-
-        let btn = $('<button>DELETE</button>');
-
-        let raw = $(`<tr><td>${id}</td><td>${name}</td><td>${price}</td><td>${qty}</td><td>${subTotal}</td></tr>`);
-        btn.click(function () {
-            raw.remove()
+        let av =-1;
+        $.each(this.array,(i,e)=>{
+            if(id===e._itemCode){
+                av=1;
+                let item = searchItem(id);
+                if(parseInt(item._itemQty)<((parseInt(e._itemQty))+parseInt(qty))){
+                    alert('qty not enough')
+                    return
+                }
+                e._itemQty=parseInt(e._itemQty)+parseInt(qty);
+                e._itemSubtotal=parseFloat(e._itemPrice)*parseFloat(e._itemQty)
+                this.setTable();
+            }
         })
-        let td = $('<td></td>');
-        td.append(btn)
-        raw.append(td)
-        $('#tblPlaceOrder').append(raw)
-
+        let item = searchItem(id);
+        if(parseInt(item._itemQty)<(parseInt(qty))){
+            alert('qty not enough')
+            return
+        }
+        if(av===1){
+            return;
+        }
+        let cartItem = new CartItem(id,name,price,qty,subTotal);
+        this.array.push(cartItem);
+        this.setTable();
         console.log(id + ' : ' + name + ' : ' + price + ' : ' + qty + ' : ' + subTotal)
     }
+
+
+
+    setTable(){
+        $('#tblPlaceOrder tr').remove();
+        $.each(this.array,(i,e)=>{
+            let btn = $('<button>DELETE</button>');
+            let raw = $(`<tr><td>${e._itemCode}</td><td>${e._itemName}</td><td>${e._itemPrice}</td><td>${e._itemQty}</td><td>${e._itemSubtotal}</td></tr>`);
+            btn.click(function () {
+                controller.array.splice(parseInt(i),1)
+                controller.setTable()
+            })
+            let td = $('<td></td>');
+            td.append(btn)
+            raw.append(td)
+            $('#tblPlaceOrder').append(raw)
+        })
+    }
+
 }
 
-new PlaceOrderController()
+var controller=new PlaceOrderController();
