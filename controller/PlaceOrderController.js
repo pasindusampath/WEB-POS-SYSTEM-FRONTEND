@@ -1,5 +1,6 @@
 import {getAllCustomers, getAllItem, searchCustomer, searchItem} from '../db/Database.js';
 import {CartItem} from "../model/cartItem.js";
+import {Customer} from "../model/Customer.js";
 
 export class PlaceOrderController {
     array = [];
@@ -109,11 +110,18 @@ export class PlaceOrderController {
 
     placeOrder(){
         let dataSet = JSON.stringify(controller.array);
-        let data = dataSet.replaceAll("_","");
+        let data=new Object();
+        data.cartItems = controller.array;
+        let id = $('#placeOrder .po_customer input[name=id]').val();
+        console.log(data.cartItems)
+        data.customer=searchCustomer(id);
+        let sendAble = JSON.stringify(data).replaceAll("_","");
+
+        console.log(sendAble)
         let setting = {
             url:"http://localhost:8080/place",
             method:"POST",
-            data:data,
+            data:sendAble,
             timeout:0
         }
 
