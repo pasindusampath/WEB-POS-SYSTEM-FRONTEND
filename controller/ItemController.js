@@ -9,7 +9,7 @@ class ItemController {
         $('#manageItem .buttons button').eq(1).click(this.searchItem.bind(this));
         $('#manageItem .buttons button').eq(2).click(this.updateItem.bind(this));
         $('#manageItem .buttons button').eq(3).click(this.deleteItem.bind(this));
-        this.getAll();
+        getAllItems();
     }
 
     addItem() {
@@ -30,7 +30,7 @@ class ItemController {
         };
         $.ajax(st).done((resp) => {
             console.log(resp)
-            this.getAll()
+            getAllItems()
             alert("Item Added Success ( ID:" + resp.itemCode + ")");
         })
         console.log(item.toString())
@@ -57,7 +57,7 @@ class ItemController {
         }
 
         $.ajax(setting).done((resp) => {
-            this.getAll()
+            getAllItems()
             alert("Item Update Success")
         })
 
@@ -89,41 +89,8 @@ class ItemController {
 
     }
 
-    getAll() {
-        let setting = {
-            url: "http://localhost:8080/item?type=all?",
-            method: 'GET',
-            timeout: 0
-        };
-        try {
-            $.ajax(setting).done((resp) => {
-                console.log(resp);
-                let item_arr = [];
-                $.each(resp, (i, e) => {
 
-                        item_arr.push(new Item(e.itemCode, e.itemName, e.itemPrice, e.itemQty))
-                    }
-                );
-                localStorage.setItem(itemDb,JSON.stringify(item_arr));
 
-            }).always(function(jqXHR, textStatus) {
-                ob.setTable()
-            });
-        }catch (e) {
-            console.log(e.toString())
-            ob.setTable();
-        }
-
-    }
-
-    setTable(){
-        $('#manageItem tbody').children().remove()
-        let allItem = getAllItem();
-        $.each(allItem,((i,e)=>{
-            let tr = `<tr><td>${e._itemCode}</td><td>${e._itemName}</td><td>${e._itemPrice}</td><td>${e._itemQty}</td></tr>`;
-            $('#manageItem tbody').append(tr)
-        }))
-    }
 
     deleteItem() {
         let boolean = this.validate(1);
@@ -143,7 +110,7 @@ class ItemController {
             }
         }
         $.ajax(setting).done((resp) => {
-            this.getAll()
+            getAllItems()
             alert("Deleted Success")
         })
         console.log(item.toString())
@@ -164,3 +131,39 @@ class ItemController {
 }
 
 var ob = new ItemController();
+
+export function setTable(){
+    $('#manageItem tbody').children().remove()
+    let allItem = getAllItem();
+    $.each(allItem,((i,e)=>{
+        let tr = `<tr><td>${e._itemCode}</td><td>${e._itemName}</td><td>${e._itemPrice}</td><td>${e._itemQty}</td></tr>`;
+        $('#manageItem tbody').append(tr)
+    }))
+}
+
+export function getAllItems() {
+    let setting = {
+        url: "http://localhost:8080/item?type=all?",
+        method: 'GET',
+        timeout: 0
+    };
+    try {
+        $.ajax(setting).done((resp) => {
+            console.log(resp);
+            let item_arr = [];
+            $.each(resp, (i, e) => {
+
+                    item_arr.push(new Item(e.itemCode, e.itemName, e.itemPrice, e.itemQty))
+                }
+            );
+            localStorage.setItem(itemDb,JSON.stringify(item_arr));
+
+        }).always(function(jqXHR, textStatus) {
+            setTable()
+        });
+    }catch (e) {
+        console.log(e.toString())
+        setTable();
+    }
+
+}

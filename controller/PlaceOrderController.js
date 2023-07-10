@@ -1,6 +1,6 @@
 import {getAllCustomers, getAllItem, searchCustomer, searchItem} from '../db/Database.js';
 import {CartItem} from "../model/cartItem.js";
-import {Customer} from "../model/Customer.js";
+import {getAllItems} from "./ItemController.js";
 
 export class PlaceOrderController {
     array = [];
@@ -15,6 +15,7 @@ export class PlaceOrderController {
 
     setItemComboBox() {
         $('#cbItem option').remove()
+        $('#cbItem').append($('<option>SELECT ITEM</option>'))
         let items = getAllItem();
         console.log(items)
         $.each(items, (i, e) => {
@@ -40,6 +41,7 @@ export class PlaceOrderController {
 
     setCustomerComboBox() {
         $('#cbCustomer option').remove()
+        $('#cbCustomer').append($('<option>SELECT CUSTOMER</option>'))
         let allCustomers = getAllCustomers();
         $.each(allCustomers, (i, e) => {
             var op = $(`<option>${e._id}</option>`);
@@ -59,46 +61,70 @@ export class PlaceOrderController {
     }
 
     btnAddToCart() {
+        let qty = $('.po_item input[name=qtyBought]').val();
+        if (!qty){
+            alert('Qty Cannot Be Empty')
+            return;
+        }
         let id = $('#cbItem').val();
         let name = $('.po_item input[name=itemName]').val();
         let price = $('.po_item input[name=price]').val();
-        let qty = $('.po_item input[name=qtyBought]').val();
+
         let subTotal = parseFloat(price) * parseFloat(qty);
-        let av =-1;
-        $.each(this.array,(i,e)=>{
-            if(id===e._itemCode){
-                av=1;
+        let av = -1;
+        $.each(this.array, (i, e) => {
+            if (id === e._itemCode) {
+                av = 1;
                 let item = searchItem(id);
-                if(parseInt(item._itemQty)<((parseInt(e._itemQty))+parseInt(qty))){
+                if (parseInt(item._itemQty) < ((parseInt(e._itemQty)) + parseInt(qty))) {
                     alert('qty not enough')
                     return
                 }
-                e._itemQty=parseInt(e._itemQty)+parseInt(qty);
-                e._itemSubtotal=parseFloat(e._itemPrice)*parseFloat(e._itemQty)
+                e._itemQty = parseInt(e._itemQty) + parseInt(qty);
+                e._itemSubtotal = parseFloat(e._itemPrice) * parseFloat(e._itemQty)
                 this.setTable();
             }
         })
         let item = searchItem(id);
-        if(parseInt(item._itemQty)<(parseInt(qty))){
+        if (parseInt(item._itemQty) < (parseInt(qty))) {
             alert('qty not enough')
             return
         }
-        if(av===1){
+        if (av === 1) {
             return;
         }
-        let cartItem = new CartItem(id,name,price,qty,subTotal);
+        let cartItem = new CartItem(id, name, price, qty, subTotal);
         this.array.push(cartItem);
         this.setTable();
+        this.clearItemDetails()
         console.log(id + ' : ' + name + ' : ' + price + ' : ' + qty + ' : ' + subTotal)
     }
 
-    setTable(){
+    clearItemDetails() {
+        $('#cbItem option').eq(0).attr('selected', 'true')
+        $('#placeOrder .po_item input[name=itemCode]').val('');
+        $('#placeOrder .po_item input[name=itemName]').val('');
+        $('#placeOrder .po_item input[name=qtyOnHand]').val('');
+        $('#placeOrder .po_item input[name=price]').val('');
+        $('#placeOrder .po_item input[name=qtyBought]').val('');
+    }
+
+    clearCustomerDetails() {
+        $('#cbCustomer option').eq(0).attr('selected', 'true')
+        $('#placeOrder .po_customer input[name=id]').val('');
+        $('#placeOrder .po_customer input[name=name]').val('');
+        $('#placeOrder .po_customer input[name=address]').val('');
+        $('#placeOrder .po_customer input[name=contact]').val('');
+
+    }
+
+    setTable() {
         $('#tblPlaceOrder tr').remove();
-        $.each(this.array,(i,e)=>{
+        $.each(this.array, (i, e) => {
             let btn = $('<button>DELETE</button>');
             let raw = $(`<tr><td>${e._itemCode}</td><td>${e._itemName}</td><td>${e._itemPrice}</td><td>${e._itemQty}</td><td>${e._itemSubtotal}</td></tr>`);
             btn.click(function () {
-                controller.array.splice(parseInt(i),1)
+                controller.array.splice(parseInt(i), 1)
                 controller.setTable()
             })
             let td = $('<td></td>');
@@ -108,29 +134,33 @@ export class PlaceOrderController {
         })
     }
 
-    placeOrder(){
+    placeOrder() {
         let dataSet = JSON.stringify(controller.array);
-        let data=new Object();
+        let data = new Object();
         data.cartItems = controller.array;
         let id = $('#placeOrder .po_customer input[name=id]').val();
         console.log(data.cartItems)
-        data.customer=searchCustomer(id);
-        let sendAble = JSON.stringify(data).replaceAll("_","");
+        data.customer = searchCustomer(id);
+        let sendAble = JSON.stringify(data).replaceAll("_", "");
 
         console.log(sendAble)
         let setting = {
-            url:"http://localhost:8080/place",
-            method:"POST",
-            data:sendAble,
-            timeout:0
+            url: "http://localhost:8080/place",
+            method: "POST",
+            data: sendAble,
+            timeout: 0
         }
 
-        $.ajax(setting).done(resp=>{
+        $.ajax(setting).done(resp => {
             console.log(resp)
+            this.clearCustomerDetails()
+            getAllItems();
+            controller.array=[];
+            controller.setTable()
         })
 
     }
 
 }
 
-var controller=new PlaceOrderController();
+var controller = new PlaceOrderController();
