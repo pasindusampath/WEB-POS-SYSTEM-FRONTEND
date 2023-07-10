@@ -20,7 +20,6 @@ class ItemController {
         }
         let item = this.collectData()
         item._itemCode = 0;
-        console.log(JSON.stringify(item).replaceAll("_", ""))
         let st = {
             url: "http://localhost:8080/item",
             method: "POST",
@@ -29,11 +28,9 @@ class ItemController {
             data: JSON.stringify(item).replaceAll("_", "")
         };
         $.ajax(st).done((resp) => {
-            console.log(resp)
             getAllItems()
             alert("Item Added Success ( ID:" + resp.itemCode + ")");
         })
-        console.log(item.toString())
     }
 
     updateItem() {
@@ -61,7 +58,6 @@ class ItemController {
             alert("Item Update Success")
         })
 
-        console.log(item.toString())
     }
 
     searchItem() {
@@ -113,7 +109,6 @@ class ItemController {
             getAllItems()
             alert("Deleted Success")
         })
-        console.log(item.toString())
     }
 
     collectData() {
@@ -149,7 +144,6 @@ export function getAllItems() {
     };
     try {
         $.ajax(setting).done((resp) => {
-            console.log(resp);
             let item_arr = [];
             $.each(resp, (i, e) => {
 

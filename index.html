@@ -270,6 +270,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-align: center;
         }
 
         .center {
@@ -323,15 +324,15 @@
                 <div class="orderCount top-card">
                     <div class="text">
                         <h5>ORDER COUNT FOR THIS MONTH</h5>
-                        <h5>30</h5>
+                        <h5 id="orderCount">--</h5>
                     </div>
                 </div>
             </div>
             <div class="col-4">
                 <div class="orderCount top-card">
                     <div class="text">
-                        <h5>ORDER COUNT FOR THIS MONTH</h5>
-                        <h5>30</h5>
+                        <h5>Registered Customer Count</h5>
+                        <h5 id="Customer Count">--</h5>
                     </div>
                 </div>
             </div>
@@ -601,14 +602,12 @@
 <script type="module" src="controller/CustomerController.js"></script>
 <script type="module" src="controller/ItemController.js"></script>
 <script type="module" src="controller/PlaceOrderController.js"></script>
+<script type="module" src="controller/DashBoardController.js"></script>
 <script type="module" src="db/Database.js"></script>
 <script>
     let buttons = $('.nav-items a');
     $.each(buttons, function (i, e) {
-        console.log(i)
-        console.log($(e).text())
         $(e).click(function () {
-            console.log('pressed ' + i)
             $('body>div').removeClass('show');
             $('body>div').eq(i).addClass('show');
         });

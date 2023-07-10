@@ -17,7 +17,6 @@ export class PlaceOrderController {
         $('#cbItem option').remove()
         $('#cbItem').append($('<option>SELECT ITEM</option>'))
         let items = getAllItem();
-        console.log(items)
         $.each(items, (i, e) => {
             let op = `<option>${e._itemCode}</option>`
             $('#cbItem').append($(op));
@@ -52,7 +51,6 @@ export class PlaceOrderController {
             let find = $(this).find('option:selected');
             let text = find.text();
             let cust = searchCustomer(text);
-            console.log(cust)
             $('#placeOrder .po_customer input[name=id]').val(cust._id);
             $('#placeOrder .po_customer input[name=name]').val(cust._name);
             $('#placeOrder .po_customer input[name=address]').val(cust._address);
@@ -97,7 +95,6 @@ export class PlaceOrderController {
         this.array.push(cartItem);
         this.setTable();
         this.clearItemDetails()
-        console.log(id + ' : ' + name + ' : ' + price + ' : ' + qty + ' : ' + subTotal)
     }
 
     clearItemDetails() {
@@ -135,15 +132,11 @@ export class PlaceOrderController {
     }
 
     placeOrder() {
-        let dataSet = JSON.stringify(controller.array);
         let data = new Object();
         data.cartItems = controller.array;
         let id = $('#placeOrder .po_customer input[name=id]').val();
-        console.log(data.cartItems)
         data.customer = searchCustomer(id);
         let sendAble = JSON.stringify(data).replaceAll("_", "");
-
-        console.log(sendAble)
         let setting = {
             url: "http://localhost:8080/place",
             method: "POST",
@@ -152,7 +145,6 @@ export class PlaceOrderController {
         }
 
         $.ajax(setting).done(resp => {
-            console.log(resp)
             this.clearCustomerDetails()
             getAllItems();
             controller.array=[];

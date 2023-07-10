@@ -5,7 +5,6 @@ class CustomerController{
 
 
     constructor() {
-        console.log('called')
         $('#manageCustomer .buttons button:first-child').click(this.addCustomer.bind(this));
         $('#manageCustomer .buttons button:nth-child(2)').click(this.searchCustomer.bind(this));
         $('#manageCustomer .buttons button:nth-child(4)').click(this.updateCustomer.bind(this));
