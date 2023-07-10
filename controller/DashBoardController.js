@@ -43,7 +43,7 @@ export function getIncomeData(){
     let months=[];
     let values=[];
     let setting = {
-        url:"http://localhost:808/dashboard?switch=incomeData",
+        url:"http://localhost:8080/dashboard?switch=incomeData",
         method:"GET",
         timeout:0
     }

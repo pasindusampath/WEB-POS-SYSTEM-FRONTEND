@@ -10,6 +10,65 @@
           integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
+        .card {
+            position: relative;
+            width: 190px;
+            height: 254px;
+            background-color: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+            padding: 12px;
+            gap: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            color: aquamarine;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            margin: auto;
+            border-radius: 10px;
+            background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100% );
+            z-index: -10;
+            pointer-events: none;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card::after {
+            content: "";
+            z-index: -1;
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100% );
+            transform: translate3d(0, 0, 0) scale(0.95);
+            filter: blur(20px);
+        }
+
+        .heading {
+            font-size: 20px;
+            text-transform: capitalize;
+            font-weight: 700;
+        }
+
+        .card p:not(.heading) {
+            font-size: 14px;
+        }
+
+        .card p:last-child {
+            color: #e81cff;
+            font-weight: 600;
+        }
+
+        .card:hover::after {
+            filter: blur(30px);
+        }
+
+        .card:hover::before {
+            transform: rotate(-180deg);
+        }
         * {
             box-sizing: border-box;
         }
@@ -276,9 +335,9 @@
         .center {
             width: 100%;
             height: 100%;
-            display: flex;
+            /*display: flex;*/
             align-items: center;
-            justify-content: space-around;
+            justify-content: center;
         }
 
         #manageCustomer, #dashboard, #manageItem, #placeOrder {
@@ -291,6 +350,18 @@
             display: flex !important;
             flex-direction: column;
             align-items: center;
+            justify-content: space-around;
+        }
+
+        .center-clock {
+            justify-content: center;
+            position: relative;
+        }
+
+        .dashboard-clock-and-details{
+            display: flex;
+            flex-direction: column;
+            height: 73vh;
             justify-content: space-around;
         }
 
@@ -313,26 +384,30 @@
 <div id="dashboard" class="mt-5 show">
     <div class="container shadow-lg">
         <div class="row">
-            <div class="col-5">
-                <div class="center">
-                    <canvas id="clock"></canvas>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-4">
-                <div class="orderCount top-card">
-                    <div class="text">
-                        <h5>ORDER COUNT FOR THIS MONTH</h5>
-                        <h5 id="orderCount">--</h5>
+            <div class="col-8 dashboard-clock-and-details">
+                <div class="row center-clock">
+                    <div class="col-5">
+                        <div class="center">
+                            <canvas id="clock"></canvas>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-4">
-                <div class="orderCount top-card">
-                    <div class="text">
-                        <h5>Registered Customer Count</h5>
-                        <h5 id="customerCount">--</h5>
+                <div class="row center-clock">
+                    <div class="col-4">
+                        <div class="orderCount top-card card">
+                            <div class="text">
+                                <h5>ORDER COUNT FOR THIS MONTH</h5>
+                                <h5 id="orderCount">--</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="orderCount top-card card">
+                            <div class="text">
+                                <h5>Registered Customer Count</h5>
+                                <h5 id="customerCount">--</h5>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -342,6 +417,7 @@
                 </div>
             </div>
         </div>
+
 
     </div>
 </div>
