@@ -22,6 +22,8 @@ export function getOrderCount(){
     $.ajax(setting).done(resp=>{
         $('#orderCount').text(resp)
         console.log(resp)
+    }).error(e=>{
+        setChart(["loading failed","loading failed"],[50,50],['rgb(54, 162, 235)', 'rgb(255, 205, 86)'])
     })
 }
 export function getCustomerCount(){
