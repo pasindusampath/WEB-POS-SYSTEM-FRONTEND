@@ -31,7 +31,7 @@
             inset: 0;
             margin: auto;
             border-radius: 10px;
-            background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100% );
+            background: linear-gradient(-45deg, #e81cff 0%, #40c9ff 100%);
             z-index: -10;
             pointer-events: none;
             transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -42,7 +42,7 @@
             z-index: -1;
             position: absolute;
             inset: 0;
-            background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100% );
+            background: linear-gradient(-45deg, #fc00ff 0%, #00dbde 100%);
             transform: translate3d(0, 0, 0) scale(0.95);
             filter: blur(20px);
         }
@@ -67,8 +67,115 @@
         }
 
         .card:hover::before {
-           /* //transform: rotate(-180deg);*/
+            /* //transform: rotate(-180deg);*/
         }
+
+        .btnPayOut {
+            width: 130px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(15, 15, 15);
+            border: none;
+            color: white;
+            font-weight: 600;
+            gap: 8px;
+            cursor: pointer;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.103);
+            position: relative;
+            overflow: hidden;
+            transition-duration: .3s;
+        }
+
+        .btnPayOut .svgIcon {
+            width: 16px;
+        }
+
+        .btnPayOut .svgIcon path {
+            fill: white;
+        }
+
+        .btnPayOut::before {
+            width: 130px;
+            height: 130px;
+            position: absolute;
+            content: "";
+            background-color: white;
+            border-radius: 50%;
+            left: -100%;
+            top: 0;
+            transition-duration: .3s;
+            mix-blend-mode: difference;
+        }
+
+        .btnPayOut:hover::before {
+            transition-duration: .3s;
+            transform: translate(100%, -50%);
+            border-radius: 0;
+        }
+
+        .btnPayOut:active {
+            transform: translate(5px, 5px);
+            transition-duration: .3s;
+        }
+
+        .btnAddToCart{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 6px 12px;
+            gap: 4px;
+            height: 32px;
+            width: 81px;
+            border: none;
+            background: #1b1b1cd0;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .btnAddToCart .lable {
+            line-height: 22px;
+            font-size: 17px;
+            color: #ffffff;
+            font-family: sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .svg-icon {
+            fill: white;
+        }
+
+        .btnAddToCart:hover {
+            background: #1b1b1cea;
+        }
+
+        .btnAddToCart:hover .svg-icon {
+            animation: rotate 1.3s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            25% {
+                transform: rotate(10deg);
+            }
+
+            50% {
+                transform: rotate(0deg);
+            }
+
+            75% {
+                transform: rotate(-10deg);
+            }
+
+            100% {
+                transform: rotate(0deg);
+            }
+        }
+
         * {
             box-sizing: border-box;
         }
@@ -358,7 +465,7 @@
             position: relative;
         }
 
-        .dashboard-clock-and-details{
+        .dashboard-clock-and-details {
             display: flex;
             flex-direction: column;
             height: 73vh;
@@ -609,12 +716,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-container mt-3">
-                        <input style="width: 50%" type="number" name="qtyBought" placeholder="--">
-                        <button id="btnAddToCart">ADD To CART</button>
-                        <label>QTY</label>
+                    <div class="row">
+                        <div class="col-5">
+                            <div class="input-container mt-3">
+                                <input style="width: 50%" type="number" name="qtyBought" placeholder="--">
 
+                                <label>QTY</label>
+
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <button id="btnAddToCart" type="button" class="btnAddToCart">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20" fill="none" class="svg-icon"><g stroke-width="1.5" stroke-linecap="round" stroke="#de8a2a"><circle r="7.5" cy="10" cx="10"></circle><path d="m9.99998 7.5v5"></path><path d="m7.5 9.99998h5"></path></g></svg>
+                                <span class="lable">Add</span>
+                            </button>
+                        </div>
                     </div>
+
                 </div>
 
             </div>
@@ -633,7 +751,11 @@
                         </div>
                     </div>
                     <div class="mt-5">
-                        <button id="btnPlaceOrder">Place Order</button>
+                        <button id="btnPlaceOrder" class="btnPayOut">Pay
+                            <svg class="svgIcon" viewBox="0 0 576 512">
+                                <path d="M512 80c8.8 0 16 7.2 16 16v32H48V96c0-8.8 7.2-16 16-16H512zm16 144V416c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V224H528zM64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm56 304c-13.3 0-24 10.7-24 24s10.7 24 24 24h48c13.3 0 24-10.7 24-24s-10.7-24-24-24H120zm128 0c-13.3 0-24 10.7-24 24s10.7 24 24 24H360c13.3 0 24-10.7 24-24s-10.7-24-24-24H248z"></path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
             </div>
