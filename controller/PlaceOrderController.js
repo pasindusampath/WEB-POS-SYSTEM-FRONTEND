@@ -1,6 +1,7 @@
 import {getAllCustomers, getAllItem, searchCustomer, searchItem} from '../db/Database.js';
 import {CartItem} from "../model/cartItem.js";
 import {getAllItems} from "./ItemController.js";
+import {getOrderCount} from "./DashBoardController.js";
 
 export class PlaceOrderController {
     array = [];
@@ -149,6 +150,7 @@ export class PlaceOrderController {
             getAllItems();
             controller.array=[];
             controller.setTable()
+            getOrderCount();
         })
 
     }
