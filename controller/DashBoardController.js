@@ -4,6 +4,7 @@ export class DashBoardController{
         getCustomerCount();
         getIncomeData()
         //this.setChart()
+        setChart2();
     }
 }
 new DashBoardController();
@@ -78,4 +79,25 @@ export function setChart(months,income,colors){
         data: chartData,
     };
     new Chart(chartElement, chartConfig)
+}
+
+export function setChart2(){
+
+    const data = {
+        labels:[1,2,3,4,5,6,7],
+        datasets: [{
+            label: 'ITEM COUNT SOLD',
+            data: [65, 59, 80, 81, 56, 55, 40],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }]
+    };
+    const config = {
+        type: 'line',
+        data: data,
+    };
+
+
+    new Chart($('#chart2'), config)
 }
