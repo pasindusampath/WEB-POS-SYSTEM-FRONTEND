@@ -483,6 +483,22 @@
             justify-content: space-around;
         }
 
+        @media all and (max-width:750px) {
+            .media{
+                flex-direction: column;
+                align-items: center;
+            }
+            .center-chart{
+
+            }
+            .dashboard-clock-and-details{
+                width: 100%;
+            }
+            .con-750{
+                align-items: center;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -500,8 +516,8 @@
     </div>
 </header>
 <div id="dashboard" class="mt-5 show">
-    <div class="container shadow-lg">
-        <div class="row">
+    <div class="container shadow-lg con-750">
+        <div class="media row">
             <div class="col-8 dashboard-clock-and-details">
                 <div class="row center-clock">
                     <div class="col-5">
