@@ -5,10 +5,6 @@ export class DashBoardController{
         getIncomeData()
         //this.setChart()
     }
-
-
-
-
 }
 new DashBoardController();
 
@@ -21,8 +17,7 @@ export function getOrderCount(){
 
     $.ajax(setting).done(resp=>{
         $('#orderCount').text(resp)
-        console.log(resp)
-    })
+    });
 }
 export function getCustomerCount(){
     let setting={
@@ -33,7 +28,6 @@ export function getCustomerCount(){
 
     $.ajax(setting).done(resp=>{
         $('#customerCount').text(resp)
-        console.log(resp)
     })
 }
 
@@ -83,8 +77,5 @@ export function setChart(months,income,colors){
         type: 'pie',
         data: chartData,
     };
-    console.log("months : "+months)
-    console.log("income : "+income)
-    console.log("Colors : "+ colors)
     new Chart(chartElement, chartConfig)
 }

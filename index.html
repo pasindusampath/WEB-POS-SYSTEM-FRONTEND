@@ -471,6 +471,11 @@
             height: 73vh;
             justify-content: space-around;
         }
+        .center-chart{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
 
     </style>
 </head>
@@ -518,7 +523,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-4">
+            <div class="col-4 center-chart">
                 <div>
                     <canvas id="myChart"></canvas>
                 </div>
@@ -741,13 +746,13 @@
                     <div class="total mt-5">
                         <div class="background">
                             <h3>TOTAL : </h3>
-                            <h3 id="total">500.00</h3>
+                            <h3 id="total">--.--</h3>
                         </div>
                     </div>
                     <div class="discount mt-5">
                         <div class="background">
                             <h3>DISCOUNT : </h3>
-                            <h3 id="discount">500.00</h3>
+                            <h3 id="discount">--.--</h3>
                         </div>
                     </div>
                     <div class="mt-5">

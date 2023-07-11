@@ -14,6 +14,14 @@ export class PlaceOrderController {
         $('#tblPlaceOrder tr').remove();
     }
 
+    setTotal(){
+        let total=0;
+        $.each(this.array,(i,e)=>{
+            total=parseFloat(total)+parseFloat(e._itemSubtotal)
+        });
+        $('#total').text(total)
+    }
+
     setItemComboBox() {
         $('#cbItem option').remove()
         $('#cbItem').append($('<option>SELECT ITEM</option>'))
@@ -76,18 +84,18 @@ export class PlaceOrderController {
                 av = 1;
                 let item = searchItem(id);
                 if (parseInt(item._itemQty) < ((parseInt(e._itemQty)) + parseInt(qty))) {
-                    alert('qty not enough')
-                    return
+                    alert('qty not enough');
+                    return;
                 }
                 e._itemQty = parseInt(e._itemQty) + parseInt(qty);
-                e._itemSubtotal = parseFloat(e._itemPrice) * parseFloat(e._itemQty)
+                e._itemSubtotal = parseFloat(e._itemPrice) * parseFloat(e._itemQty);
                 this.setTable();
             }
         })
         let item = searchItem(id);
         if (parseInt(item._itemQty) < (parseInt(qty))) {
-            alert('qty not enough')
-            return
+            alert('qty not enough');
+            return;
         }
         if (av === 1) {
             return;
@@ -95,7 +103,8 @@ export class PlaceOrderController {
         let cartItem = new CartItem(id, name, price, qty, subTotal);
         this.array.push(cartItem);
         this.setTable();
-        this.clearItemDetails()
+        this.setTotal();
+        this.clearItemDetails();
     }
 
     clearItemDetails() {
@@ -124,6 +133,7 @@ export class PlaceOrderController {
             btn.click(function () {
                 controller.array.splice(parseInt(i), 1)
                 controller.setTable()
+                controller.setTotal();
             })
             let td = $('<td></td>');
             td.append(btn)
@@ -149,7 +159,8 @@ export class PlaceOrderController {
             this.clearCustomerDetails()
             getAllItems();
             controller.array=[];
-            controller.setTable()
+            controller.setTable();
+            this.setTotal();
             getOrderCount();
         })
 
