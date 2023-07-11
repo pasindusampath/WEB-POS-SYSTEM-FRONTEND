@@ -1,3 +1,5 @@
+<img src="https://i.ibb.co/nc8kydD/modi.png" alt="modi" border="0">
+
 Sigle Page Application to Manage Customers,Items and Palace Orders
 
 Used Technologies
