@@ -489,13 +489,17 @@
                 align-items: center;
             }
             .center-chart{
-
+                height: 300px;
+                width: 300px;
             }
             .dashboard-clock-and-details{
                 width: 100%;
             }
             .con-750{
                 align-items: center;
+            }
+            .count-label{
+                width: 47.3333%;
             }
         }
 
@@ -532,7 +536,7 @@
                     </div>
                 </div>
                 <div class="row center-clock">
-                    <div class="col-4">
+                    <div class="col-4 count-label">
                         <div class="orderCount top-card card">
                             <div class="text">
                                 <h5>ORDER COUNT FOR THIS MONTH</h5>
@@ -540,7 +544,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 count-label">
                         <div class="orderCount top-card card">
                             <div class="text">
                                 <h5>Registered Customer Count</h5>
@@ -848,6 +852,7 @@
 </script>
 <script>
     const canvas = document.getElementById("clock");
+    canvas.width=canvas.height
     const ctx = canvas.getContext("2d");
     let radius = canvas.height / 2;
     ctx.translate(radius, radius);
