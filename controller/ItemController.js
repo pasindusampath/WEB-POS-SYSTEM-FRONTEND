@@ -1,8 +1,6 @@
 import {Item} from "../model/Item.js";
 import {getAllItem} from "../db/Database.js";
-
 const itemDb = 'ITEMDATA';
-
 class ItemController {
     constructor() {
         $('#manageItem .buttons button').eq(0).click(this.addItem.bind(this));
@@ -11,7 +9,6 @@ class ItemController {
         $('#manageItem .buttons button').eq(3).click(this.deleteItem.bind(this));
         getAllItems();
     }
-
     addItem() {
         let boolean = this.validate();
         if (!boolean) {
@@ -29,10 +26,10 @@ class ItemController {
         };
         $.ajax(st).done((resp) => {
             getAllItems()
+            ob.clearFields()
             alert("Item Added Success ( ID:" + resp.itemCode + ")");
         })
     }
-
     updateItem() {
         let boolean = this.validate(1);
         if (!boolean) {
@@ -55,11 +52,11 @@ class ItemController {
 
         $.ajax(setting).done((resp) => {
             getAllItems()
+            ob.clearFields()
             alert("Item Update Success")
         })
 
     }
-
     searchItem() {
         let code = $('#itemCode').val();
         if (!code) {
@@ -76,17 +73,19 @@ class ItemController {
                 }
             }
         }
-
         $.ajax(setting).done((resp) => {
             $('#itemName').val(resp.itemName)
             $('#itemPrice').val(resp.itemPrice)
             $('#itemQty').val(resp.itemQty)
         });
-
     }
 
-
-
+    clearFields(){
+        $('#itemCode').val("");
+        $('#itemName').val("");
+        $('#itemPrice').val("");
+        $('#itemQty').val("");
+    }
 
     deleteItem() {
         let boolean = this.validate(1);
@@ -107,6 +106,7 @@ class ItemController {
         }
         $.ajax(setting).done((resp) => {
             getAllItems()
+            ob.clearFields()
             alert("Deleted Success")
         })
     }
